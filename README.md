@@ -31,5 +31,12 @@ modal component: npm install vue-js-modal --save
 EsLint - airbnb style
 ```
 
+### Options
+```
+If you want to use modal with an iFrame, handle the commented code in
+src\views\Home.vue
+src\components\imageCard.vue
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
