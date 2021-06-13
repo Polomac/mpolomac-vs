@@ -1,18 +1,52 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-for="image in images" :key="image.id">
+      <image-card :image="image" @setIframe="setIframe"/>
+    </div>;
+    <!-- Uncomment if you want to use modal with iFrame
+    <iframe-modal></iframe-modal>
+    -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import { mapGetters } from 'vuex';
+
+const imageCard = () => import('../components/imageCard.vue');
+const iframeModal = () => import('../components/iFrameModal.vue');
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    imageCard,
+    // eslint-disable-next-line
+    iframeModal,
+  },
+  computed: {
+    ...mapGetters(['images']),
+  },
+  methods: {
+    setIframe(val) {
+      this.$modal.show('iframe-modal', val);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '../assets/styles/defaults.scss';
+
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+  position: relative;
+  @include mqBreakPoint(832px) {
+    justify-content: space-evenly;
+  }
+  @include mqBreakPoint(1218px) {
+    justify-content: space-between;
+  }
+}
+</style>
